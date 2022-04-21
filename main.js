@@ -33,29 +33,59 @@ const printBoard = () => {
 }
 
 const horizontalWin = () => {
-  // Your code here to check for horizontal wins
+  // for(let i = 0; i < board.length; i++) {
+  //   console.log(board[i])
+  //   if(board[i] === [ ['X', 'X', 'X'], [' ', ' ', ' '], [' ', ' ', ' '] ] || 
+  //     board[i] === [ [' ', ' ', ' '], ['X', 'X', 'X'], [' ', ' ', ' '] ] || 
+  //     board[i] === [ [' ', ' ', ' '], [' ', ' ', ' '], ['X', 'X', 'X'] ]) {
+  //     return true
+
+    //   let result = board[i]
+    //   console.log(result)
+    //   if(result === [ ['X', 'X', 'X'], [' ', ' ', ' '], [' ', ' ', ' '] ] || 
+    //     result === [ [' ', ' ', ' '], ['X', 'X', 'X'], [' ', ' ', ' '] ] || 
+    //     result === [ [' ', ' ', ' '], [' ', ' ', ' '], ['X', 'X', 'X'] ]) {
+    //     return true
+    // }
+
+    // }
+  // }
+  if(board[0][0] === "X" && board[0][1] === "X" && board[0][2] === "X") {
+    return true
+  }  
 }
 
 const verticalWin = () => {
-  // Your code here to check for vertical wins
+  if(board[0][1] === "X" && board[1][1] === "X" && board[2][1] === "X") {
+    return true
+  }  
 }
 
 const diagonalWin = () => {
-  // Your code here to check for diagonal wins
+  if(board[0][0] === "X" && board[1][1] === "X" && board[2][2] === "X" || board[0][2] && board [1][1] && board[2][0]) {
+    return true
+  }  
 }
 
 const checkForWin = () => {
-  // Your code here call each of the check for types of wins
+  if(diagonalWin() === true || verticalWin() === true || horizontalWin() === true) {
+    return true
+  }
 }
 
 const ticTacToe = (row, column) => {
-  // Your code here to place a marker on the board
   // then check for a win
+  board[row][column] = playerTurn
+  if(playerTurn === "X") {
+    playerTurn = "O"
+  }  else {
+    playerTurn = "X"
+  }
 }
 
 const getPrompt = () => {
   printBoard();
-  console.log("It's Player " + playerTurn + "'s turn.");
+  console.log("It's Player " + playerTurn + "'s turn."); 
   rl.question('row: ', (row) => {
     rl.question('column: ', (column) => {
       ticTacToe(row, column);
@@ -66,8 +96,6 @@ const getPrompt = () => {
 
 
 // Unit Tests
-// You use them run the command: npm test main.js
-// to close them ctrl + C
 if (typeof describe === 'function') {
 
   describe('#ticTacToe()', () => {
@@ -86,9 +114,15 @@ if (typeof describe === 'function') {
     it('should check for horizontal wins', () => {
       board = [ ['X', 'X', 'X'], [' ', ' ', ' '], [' ', ' ', ' '] ];
       assert.equal(horizontalWin(), true);
+      // board = [ [' ', ' ', ' '], ['X', 'X', 'X'], [' ', ' ', ' '] ];
+      // assert.equal(horizontalWin(), true);
+      // board = [ [' ', ' ', ' '], [' ', ' ', ' '], ['X', 'X', 'X'] ];
+      // assert.equal(horizontalWin(), true);
     });
     it('should check for diagonal wins', () => {
       board = [ ['X', ' ', ' '], [' ', 'X', ' '], [' ', ' ', 'X'] ];
+      assert.equal(diagonalWin(), true);
+      board = [ ['', ' ', 'X'], [' ', 'X', ' '], ['X', ' ', ''] ];
       assert.equal(diagonalWin(), true);
     });
     it('should detect a win', () => {
@@ -99,6 +133,11 @@ if (typeof describe === 'function') {
       ticTacToe(2, 2)
       assert.equal(checkForWin(), true);
     });
+    // let board = [
+    //   ['X', 'X', 'X'],
+    //   [' ', 'X', ' '],
+    //   [' ', ' ', 'X']
+    // ];
   });
 } else {
 
