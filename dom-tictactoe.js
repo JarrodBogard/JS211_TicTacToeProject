@@ -66,7 +66,16 @@ const checkForWin = () => {
 
 const horizontalWin = () => {
   // @TODO, Your code here: to check for horizontal wins
+  for (let i = 0; i < board.length; i++) {
+    console.log(board[i].join(""));
+    if (board[i].join("") === "XXX" || board[i].join("") === "OOO") {
+      return true;
+    }
+  }
 }
+  // if(board[0][0] === "X" && board[0][1] === "X" && board[0][2] === "X") {
+  //   return true
+  // }
 
 const verticalWin = () => {
   // @TODO, Your code here: to check for vertical wins
